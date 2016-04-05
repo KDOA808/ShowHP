@@ -10,9 +10,9 @@ use pocketmine\event\Listener;
 
 class ShowHP extends PluginBase implements Listener {
 	public function onEnable() {
-		$this->getServer ()->getLogger ()->info ( "[ ShowHP ] 플러그인이 활성화 되었습니다 !" );
-		$this->getServer ()->getLogger ()->error ( "[ ShowHP ] 이 플러그인의 사용자는 GPLv3라이센스에 동의함으로 간주합니다. !" );
-		$this->getServer ()->getLogger ()->info ( "[ ShowHP ] 추가적인 기능을 원하신다면 MCPE KOREA 게시글에 댓글 달아주세요 !" );
+		$this->getServer ()->getLogger ()->info ( "[ ShowHP ] Plugin has been activated!" );
+		$this->getServer ()->getLogger ()->error ( "[ ShowHP ] Users of this plugin is considered to be agreed by the GPLv3 license. !" );
+		$this->getServer ()->getLogger ()->info ( "[ ShowHP ] Hello!" );
 		$this->getServer ()->getPluginManager ()->registerEvents ( $this, $this );
 	}
 	public function onChat(PlayerChatEvent $event) {
