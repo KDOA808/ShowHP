@@ -41,4 +41,16 @@ class ShowHP extends PluginBase implements Listener {
         }
     }
 }
-?>
+ public function onHealthLose(EntityDamageEvent $event){
+        $entity = $event->getEntity();
+        if($entity instanceof Player){
+            $gamemode = $entity->getServer()->getGamemodeFromString($entity->getGamemode());
+            if($gamemode === 1 or $gamemode === 3){
+                $event->setCancelled(true);
+            }else{
+                $health = $entity->getHealth() - $event->getFinalDamage();
+                $this->plugin->updateHealthBar($entity, $health);
+            }
+        }
+    }
+} 
