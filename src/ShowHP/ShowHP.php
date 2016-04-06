@@ -4,7 +4,12 @@ namespace ShowHP;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\player\PlayerChatEvent;
+use pocketmine\event\entity\EntityRegainHealthEvent;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\player\PlayerJoinEvent
+use pocketmine\Player;
+use pocketmine\Server;
 use pocketmine\utils\TextFormat;
 use pocketmine\event\Listener;
 
@@ -20,8 +25,20 @@ class ShowHP extends PluginBase implements Listener {
 		$color = TextFormat::GREEN;
 		if($hp < 0) $hp = 0;
 		if($hp <= 5) $color = TextFormat::RED;
+		
 		else if($hp <= 10) $color = TextFormat::YELLOW;
+	
 		$event->setMessage ( $color . "HP: " . $hp . TextFormat::WHITE . ">" . $event->getMessage () );
 	}
+	public function onRegainHealth(EntityRegainHealthEvent $event){
+        $entity = $event->getEntity();
+        if($entity instanceof Player){
+            $health = $entity->getHealth() + $event->getAmount();
+            if($health > $entity->getMaxHealth()){
+                $health = $entity->getMaxHealth();
+            }
+            $this->plugin->updateHealthBar($entity, $health);
+        }
+    }
 }
 ?>
